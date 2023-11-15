@@ -1,3 +1,5 @@
+//SPDX-License-Identifier: GPL-3.0
+
 pragma solidity ^0.8.0;
 
 contract Exercise_2 {
@@ -20,15 +22,19 @@ contract Exercise_2 {
     function withdraw(uint256 amount) public {
         require(amount <= balances[msg.sender], "Insufficient balance");
         balances[msg.sender] -= amount;
-        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        (bool success, ) = payable (msg.sender).call{value: amount}("");
         require(success, "Transfer failed");
     }
 
-    function getContractBalance() public view returns (uint256) {
-        return address(this).balance;
+    function addBalances( uint256 amount) public onlyOwner {
+        balances[msg.sender] += amount;
     }
 
-    function destroyContract() public onlyOwner {
-        selfdestruct(payable(owner));
+    function subtractBalances( uint256 amount) public onlyOwner {
+        balances[msg.sender] -= amount;
+    }
+
+    function destroyContract(address payable recipient) public onlyOwner {
+        selfdestruct(recipient);
     }
 }
