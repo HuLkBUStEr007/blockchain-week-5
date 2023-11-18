@@ -1,8 +1,3 @@
-
-Certainly! Here's the provided Solidity code with added comments to explain each step:
-
-solidity
-Copy code
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 
